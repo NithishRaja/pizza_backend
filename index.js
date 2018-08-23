@@ -4,15 +4,19 @@
  */
 
 // Dependencies
-const http = require("http");
+const server = require("./lib/server");
 
-// Creating server
-const server = http.createServer(function(req, res){
-  res.writeHead(200);
-  res.end("pong");
-});
+// Creating container
+let app = {};
 
-// listening to port 3000
-server.listen(3000, function(){
-  console.log("Server is running on port 3000, press Ctrl+C to exit");
-});
+// Initializing init function
+app.init = function(){
+  // Starting up server
+  server.init();
+};
+
+// Calling init function
+app.init();
+
+// Exporting module
+module.exports = app;
