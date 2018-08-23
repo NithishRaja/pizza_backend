@@ -4,6 +4,7 @@
  */
 
 // Dependencies
+const path = require("path");
 
 // Creating environment container
 let environment = {};
@@ -11,13 +12,15 @@ let environment = {};
 // Initializing development environment
 environment.development = {
   'port': 80,
-  'envName': "development"
+  'envName': "development",
+  'dataDir': path.join(__dirname, "./.data")
 };
 
 // Initializing production environment
 environment.production = {
   'port': 443,
-  'envName': "production"
+  'envName': "production",
+  'dataDir': path.join(__dirname, "./.data")
 };
 
 // Deciding which environment to export
