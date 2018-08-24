@@ -23,7 +23,7 @@ const put = function(data, callback){
           userDataObject.address = data.payload.address;
         }
         if(typeof(data.payload.password)=="string"&&data.payload.password.trim().length>0){
-          userDataObject.password = data.payload.password;
+          userDataObject.password = _helpers.hash(data.payload.password);
         }
         if(typeof(data.payload.name)=="string"&&data.payload.name.trim().length>0){
           userDataObject.name = data.payload.name;

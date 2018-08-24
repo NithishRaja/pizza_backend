@@ -7,6 +7,7 @@
 const util = require("util");
 const debug = util.debuglog("users");
 const _data = require("./../../lib/data");
+const _helpers = require("./../../lib/helpers");
 
 // post function
 const post = function(data, callback){
@@ -22,12 +23,14 @@ const post = function(data, callback){
       if(!err&&userData){
         callback(403, {"Error": "User with this email already exists"});
       }else{
+        // Hashing password
+        const hashPassword = _helpers.hash(password);
         // Creating new user
         const userObject = {
           'name': name,
           'email': email,
           'address': address,
-          'password': password
+          'password': hashPassword
         };
         // Converting object to string
         const userObjectString = JSON.stringify(userObject);
