@@ -4,10 +4,41 @@
  */
 
 // Dependencies
+const util = require("util");
+const debug = util.debuglog("tokens");
+const _data = require("./../../lib/data");
+const _helpers = require("./../../lib/helpers");
 
 // put function
 const put = function(data, callback){
-  callback(200, {"message": "Inside put function"});
+  const tokenId = typeof(data.payload.token)=="string"&&data.payload.token.trim().length>0?data.payload.token.trim():false;
+  const extend = typeof(data.payload.extend)=="boolean"&&data.payload.extend?true:false;
+  // Verifying payload
+  if(tokenId&&extend){
+    // Reading token data
+    _data.read(tokenId, "tokens", function(err, tokenData){
+      if(!err&&tokenData){
+        // Parsing token data
+        const tokenDataObject = _helpers.parse(tokenData);
+        // Incrementing timeOfExpiry by 1 hour
+        tokenDataObject.timeOfExpiry = Date.now()+1000*60*60;
+        // Writing to file
+        _data.update(tokenId, "tokens", tokenDataObject, function(err){
+          if(!err){
+            callback(200);
+          }else{
+            debug("Error while writing token file", err);
+            callback(500, {"Error": "Unable to update token"});
+          }
+        });
+      }else{
+        debug("Error reading token file", err);
+        callback(403, {"Error": "Unable to read token. Token may not exist"});
+      }
+    });
+  }else{
+    callback(400, {"Error": "Missing required fields"});
+  }
 };
 
 // Exporting  function
