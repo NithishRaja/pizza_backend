@@ -4,6 +4,8 @@
  */
 
 // Dependencies
+const util = require("util");
+const debug = util.debuglog("users");
 const _data = require("./../../lib/data");
 
 // delete function
@@ -19,10 +21,12 @@ const remove = function(data, callback){
           if(!err){
             callback(200);
           }else{
+            debug("Error while deleting file", err);
             callback(500, {"Error": "Unable to delete user file"});
           }
         });
       }else{
+        debug("Error while reading file", err);
         callback(403, {"Error": "User does not exist"});
       }
     });

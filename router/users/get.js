@@ -4,6 +4,8 @@
  */
 
 // Dependencies
+const util = require("util");
+const debug = util.debuglog("users");
 const _data = require("./../../lib/data");
 const _helpers = require("./../../lib/helpers");
 
@@ -18,6 +20,7 @@ const get = function(data, callback){
         const userDataObject = _helpers.parse(userData);
         callback(200, userDataObject);
       }else{
+        debug("Error while reading file", err);
         callback(403, {"Error": "User doen not exist"});
       }
     });

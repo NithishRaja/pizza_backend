@@ -4,6 +4,8 @@
  */
 
 // Dependencies
+const util = require("util");
+const debug = util.debuglog("users");
 const _data = require("./../../lib/data");
 
 // post function
@@ -34,6 +36,7 @@ const post = function(data, callback){
           if(!err){
             callback(200);
           }else{
+            debug("Error while writing file", err);
             callback(500, {"Error": "Unable to create file"});
           }
         });
