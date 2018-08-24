@@ -18,6 +18,7 @@ const get = function(data, callback){
     _data.read(userEmail, "users", function(err, userData){
       if(!err&&userData){
         const userDataObject = _helpers.parse(userData);
+        delete userDataObject.password;
         callback(200, userDataObject);
       }else{
         debug("Error while reading file", err);
