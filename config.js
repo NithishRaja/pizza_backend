@@ -13,14 +13,16 @@ let environment = {};
 environment.development = {
   'port': 80,
   'envName': "development",
-  'dataDir': path.join(__dirname, "./.data")
+  'dataDir': path.join(__dirname, "./.data"),
+  'hashSecret': "ThisIsMyHashSecret"
 };
 
 // Initializing production environment
 environment.production = {
   'port': 443,
   'envName': "production",
-  'dataDir': path.join(__dirname, "./.data")
+  'dataDir': path.join(__dirname, "./.data"),
+  'hashSecret': "ThisIsMyProductionHashSecret"
 };
 
 // Deciding which environment to export
