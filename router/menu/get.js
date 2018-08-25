@@ -22,15 +22,23 @@ const get = function(data, callback){
         const tokenDataObject = _helpers.parse(tokenData);
         // Checking if token has expired
         if(tokenDataObject.timeOfExpiry>Date.now()){
-          // Getting menu
-          _data.read(menuCategory, "menu", function(err, menuData){
-            if(!err){
-              // Parsing menu data
-              const menuDataObject = _helpers.parse(menuData);
-              callback(200, menuDataObject);
+          // Checking if menu category exists
+          _data.list("menu", function(err, menuCategoryList){
+            if(!err&&menuCategoryList&&menuCategoryList.indexOf(menuCategory)>-1){
+              // Getting menu
+              _data.read(menuCategory, "menu", function(err, menuData){
+                if(!err){
+                  // Parsing menu data
+                  const menuDataObject = _helpers.parse(menuData);
+                  callback(200, menuDataObject);
+                }else{
+                  debug("Error reading menu", err);
+                  callback(500, {"Error": "Unable to get menu"});
+                }
+              });
             }else{
-              debug("Error reading menu", err);
-              callback(500, {"Error": "Unable to get menu"});
+              debug("Error getting menu categories", err);
+              callback(403, {"Error": "Menu category may not exist"});
             }
           });
         }else{
