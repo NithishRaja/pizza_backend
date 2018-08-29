@@ -7,6 +7,7 @@
 const util = require("util");
 const debug  = util.debuglog("menu");
 const _data  = require("./../../lib/data");
+const _menu = require("./../../lib/menu");
 
 // Post function
 const post = function(data, callback){
@@ -20,10 +21,36 @@ const post = function(data, callback){
     _data.read(tokenId, "tokens", function(err, tokenData){
       // Checking if token and email match
       if(tokenData.email===email){
-        // TODO: update cart with item id and noOfItem
-        callback(200, {"message": "OK"});
+        _menu.list(function(err, menuList){
+          if(!err&&menuList){
+            // Checking if item is on menu
+            if(menuList.indexOf(item)>-1){
+              // Initializing orderObject
+              const orderObject = {
+                'item': item,
+                'noOfItem': noOfItem
+              };
+              // Converting orderObject to string
+              const orderString = JSON.stringify(orderObject);
+              // Append to cart
+              _data.append(email, "cart", orderString+"\n", function(err){
+                if(!err){
+                  callback(200);
+                }else{
+                  debug("Error while appending to file", err);
+                  callback(500, {"Error": "Unable to append to file"});
+                }
+              });
+            }else{
+              callback(403, {"Error": "Item does not exist on menu"});
+            }
+          }else{
+            debug("Error while retrieving menu items list", err);
+            callback(500, {"Error": "Unable to get menu items"});
+          }
+        });
       }else{
-        callback(403, {"Error": "TOken does not match email"});
+        callback(403, {"Error": "Token does not match email"});
       }
     });
   }else{
