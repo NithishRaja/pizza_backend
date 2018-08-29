@@ -20,10 +20,8 @@ const post = function(data, callback){
       if(!err&&userData){
         // Hashing password
         const hashPassword = _helpers.hash(password);
-        // Parsing user data
-        const userDataObject = _helpers.parse(userData);
         // Checking if passwords match
-        if(hashPassword===userDataObject.password){
+        if(hashPassword===userData.password){
           // Getting token id
           const tokenId = _helpers.createRandomId(20);
           // Creating token object

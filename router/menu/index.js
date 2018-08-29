@@ -5,10 +5,12 @@
 
 // Dependencies
 const get = require("./get");
+const post = require("./post");
 
 // Methods container
 const methods = {
-  'get': get
+  'get': get,
+  'post': post
 };
 
 // Function to select appropriate method
