@@ -7,7 +7,6 @@
 const util = require("util");
 const debug = util.debuglog("users");
 const _data = require("./../../lib/data");
-const _helpers = require("./../../lib/helpers");
 
 // Get function
 const get = function(data, callback){
@@ -18,16 +17,13 @@ const get = function(data, callback){
     // Getting token data
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err&&tokenData){
-        // parsing token data
-        const tokenDataObject = _helpers.parse(tokenData);
         // Checking if token belongs to user and if token has not expired
-        if(tokenDataObject.email===userEmail&&tokenDataObject.timeOfExpiry>Date.now()){
+        if(tokenData.email===userEmail&&tokenData.timeOfExpiry>Date.now()){
           // Reading from file
           _data.read(userEmail, "users", function(err, userData){
             if(!err&&userData){
-              const userDataObject = _helpers.parse(userData);
-              delete userDataObject.password;
-              callback(200, userDataObject);
+              delete userData.password;
+              callback(200, userData);
             }else{
               debug("Error while reading file", err);
               callback(403, {"Error": "User doen not exist"});

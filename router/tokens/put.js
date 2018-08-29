@@ -7,7 +7,6 @@
 const util = require("util");
 const debug = util.debuglog("tokens");
 const _data = require("./../../lib/data");
-const _helpers = require("./../../lib/helpers");
 
 // put function
 const put = function(data, callback){
@@ -18,12 +17,10 @@ const put = function(data, callback){
     // Reading token data
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err&&tokenData){
-        // Parsing token data
-        const tokenDataObject = _helpers.parse(tokenData);
         // Incrementing timeOfExpiry by 1 hour
-        tokenDataObject.timeOfExpiry = Date.now()+1000*60*60;
+        tokenData.timeOfExpiry = Date.now()+1000*60*60;
         // Writing to file
-        _data.update(tokenId, "tokens", tokenDataObject, function(err){
+        _data.update(tokenId, "tokens", tokenData, function(err){
           if(!err){
             callback(200);
           }else{

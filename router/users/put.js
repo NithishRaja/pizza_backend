@@ -18,26 +18,22 @@ const put = function(data, callback){
     // Getting token data
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err&&tokenData){
-        // Parsing tokenData
-        const tokenDataObject = _helpers.parse(tokenData);
         // Checking if token belongs to user and if token has not expired
-        if(tokenDataObject.email===email&&tokenDataObject.timeOfExpiry>Date.now()){
+        if(tokenData.email===email&&tokenData.timeOfExpiry>Date.now()){
           // Getting user details
           _data.read(email, "users", function(err, userData){
             if(!err&&userData){
-              // Parsing user data
-              const userDataObject = _helpers.parse(userData);
               if(typeof(data.payload.address)=="string"&&data.payload.address.trim().length>0){
-                userDataObject.address = data.payload.address;
+                userData.address = data.payload.address;
               }
               if(typeof(data.payload.password)=="string"&&data.payload.password.trim().length>0){
-                userDataObject.password = _helpers.hash(data.payload.password);
+                userData.password = _helpers.hash(data.payload.password);
               }
               if(typeof(data.payload.name)=="string"&&data.payload.name.trim().length>0){
-                userDataObject.name = data.payload.name;
+                userData.name = data.payload.name;
               }
               // Writing updated object into file
-              _data.update(email, "users", userDataObject, function(err){
+              _data.update(email, "users", userData, function(err){
                 if(!err){
                   callback(200);
                 }else{

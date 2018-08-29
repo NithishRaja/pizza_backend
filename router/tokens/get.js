@@ -7,7 +7,6 @@
 const util = require("util");
 const debug = util.debuglog("tokens");
 const _data = require("./../../lib/data");
-const _helpers = require("./../../lib/helpers");
 
 // Get function
 const get = function(data, callback){
@@ -17,9 +16,7 @@ const get = function(data, callback){
     // Getting token data
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err){
-        // Parsing token data
-        const tokenDataObject = _helpers.parse(tokenData);
-        callback(200, tokenDataObject);
+        callback(200, tokenData);
       }else{
         debug("Error reading token file", err);
         callback(403, {"Error": "Token does not exist"});
