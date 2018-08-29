@@ -29,9 +29,7 @@ const get = function(data, callback){
               // Getting menu
               _menu.read(menuCategory, function(err, menuData){
                 if(!err){
-                  // Parsing menu data
-                  const menuDataObject = _helpers.parse(menuData);
-                  callback(200, menuDataObject);
+                  callback(200, menuData);
                 }else{
                   debug("Error reading menu", err);
                   callback(500, {"Error": "Unable to get menu"});
