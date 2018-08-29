@@ -6,6 +6,7 @@
 // Dependencies
 const util = require("util");
 const debug = util.debuglog("menu");
+const _menu = require("./../../lib/menu");
 const _data = require("./../../lib/data");
 const _helpers = require("./../../lib/helpers");
 
@@ -23,10 +24,10 @@ const get = function(data, callback){
         // Checking if token has expired
         if(tokenDataObject.timeOfExpiry>Date.now()){
           // Checking if menu category exists
-          _data.list("menu", function(err, menuCategoryList){
+          _menu.list(function(err, menuCategoryList){
             if(!err&&menuCategoryList&&menuCategoryList.indexOf(menuCategory)>-1){
               // Getting menu
-              _data.read(menuCategory, "menu", function(err, menuData){
+              _menu.read(menuCategory, function(err, menuData){
                 if(!err){
                   // Parsing menu data
                   const menuDataObject = _helpers.parse(menuData);
