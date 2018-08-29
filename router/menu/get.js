@@ -13,7 +13,7 @@ const _helpers = require("./../../lib/helpers");
 // Get method
 const get = function(data, callback){
   const tokenId = typeof(data.headers.token)=="string"&&data.headers.token.trim().length==20?data.headers.token.trim():false;
-  const menuCategory = typeof(data.query.menu)=="string"&&data.query.menu.trim().length>0?data.query.menu.trim():"full";
+  const menuCategory = typeof(data.query.item)=="string"&&data.query.item.trim().length>0?data.query.item.trim():"full";
   // Validating token
   if(tokenId){
     // Getting token data
