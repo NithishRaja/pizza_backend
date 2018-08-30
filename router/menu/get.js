@@ -8,7 +8,6 @@ const util = require("util");
 const debug = util.debuglog("menu");
 const _menu = require("./../../lib/menu");
 const _data = require("./../../lib/data");
-const _helpers = require("./../../lib/helpers");
 
 // Get method
 const get = function(data, callback){
@@ -19,25 +18,15 @@ const get = function(data, callback){
     // Getting token data
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err&&tokenData){
-        // Parsing token data
-        const tokenDataObject = _helpers.parse(tokenData);
         // Checking if token has expired
-        if(tokenDataObject.timeOfExpiry>Date.now()){
+        if(tokenData.timeOfExpiry>Date.now()){
           // Checking if menu category exists
-          _menu.list(function(err, menuCategoryList){
-            if(!err&&menuCategoryList&&menuCategoryList.indexOf(menuCategory)>-1){
-              // Getting menu
-              _menu.read(menuCategory, function(err, menuData){
-                if(!err){
-                  callback(200, menuData);
-                }else{
-                  debug("Error reading menu", err);
-                  callback(500, {"Error": "Unable to get menu"});
-                }
-              });
+          _menu.list(function(err, menuList){
+            if(!err&&menuList){
+              callback(200, menuList);
             }else{
               debug("Error getting menu categories", err);
-              callback(403, {"Error": "Menu category may not exist"});
+              callback(500, {"Error": "Unable to get menu"});
             }
           });
         }else{

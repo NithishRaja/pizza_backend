@@ -9,6 +9,7 @@ const notFound = require("./notFound");
 const users = require("./users");
 const tokens = require("./tokens");
 const menu = require("./menu");
+const cart = require("./cart");
 
 // Container object
 const router = {
@@ -16,6 +17,7 @@ const router = {
   'users': users,
   'tokens': tokens,
   'menu': menu,
+  'cart': cart,
   'notFound': notFound
 };
 

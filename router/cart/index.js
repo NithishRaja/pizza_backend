@@ -1,19 +1,22 @@
 /*
- * Container file for menu route
+ * COntainer file for cart methods
  *
  */
 
 // Dependencies
-const get = require("./get");
+const post = require("./post");
+const remove = require("./delete");
 
-// Methods container
+// Container object
 const methods = {
-  'get': get
+  'post': post,
+  'delete': remove
 };
 
 // Function to select appropriate method
 const handler = function(data, callback){
   const selectedMethod = typeof(methods[data.method.trim().toLowerCase()])!="undefined"?methods[data.method.trim().toLowerCase()]:false;
+  // Checking if requested method exists
   if(selectedMethod){
     selectedMethod(data, callback);
   }else{

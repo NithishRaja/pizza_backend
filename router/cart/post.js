@@ -19,8 +19,8 @@ const post = function(data, callback){
   if(tokenId&&email&&item&&noOfItem){
     // Getting token data
     _data.read(tokenId, "tokens", function(err, tokenData){
-      // Checking if token and email match
-      if(tokenData.email===email){
+      // Checking if token and email match and if token has expired
+      if(tokenData.email===email&&tokenData.timeOfExpiry>Date.now()){
         _menu.list(function(err, menuList){
           if(!err&&menuList){
             // Checking if item is on menu
