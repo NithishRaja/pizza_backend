@@ -6,11 +6,13 @@
 // Dependencies
 const get = require("./get");
 const post = require("./post");
+const remove = require("./delete");
 
 // Methods container
 const methods = {
   'get': get,
-  'post': post
+  'post': post,
+  'delete': remove
 };
 
 // Function to select appropriate method
