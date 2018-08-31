@@ -7,6 +7,7 @@
 const util = require("util");
 const debug = util.debuglog("cart");
 const _data = require("./../../lib/data");
+const _cart = require("./../../lib/cart");
 
 // Get function
 const get = function(data, callback){
@@ -20,7 +21,7 @@ const get = function(data, callback){
         // Checking if token belongs to user and if token has expired
         if(tokenData.email===email&&tokenData.timeOfExpiry>Date.now()){
           // Getting cart details
-          _data.read(email, "cart", function(err, cartData){
+          _cart.read(email, function(err, cartData){
             if(!err){
               console.log(cartData);
               // Checking if cart is empty

@@ -8,6 +8,7 @@ const util = require("util");
 const debug  = util.debuglog("menu");
 const _data  = require("./../../lib/data");
 const _menu = require("./../../lib/menu");
+const _cart = require("./../../lib/cart");
 
 // Post function
 const post = function(data, callback){
@@ -30,10 +31,8 @@ const post = function(data, callback){
                 'item': item,
                 'noOfItem': noOfItem
               };
-              // Converting orderObject to string
-              const orderString = JSON.stringify(orderObject);
               // Append to cart
-              _data.append(email, "cart", orderString+"\n", function(err){
+              _cart.append(email, orderObject, function(err){
                 if(!err){
                   callback(200);
                 }else{

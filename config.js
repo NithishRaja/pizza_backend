@@ -15,6 +15,7 @@ environment.development = {
   'envName': "development",
   'dataDir': path.join(__dirname, "./.data"),
   'menuDir': path.join(__dirname, "./.menu"),
+  'cartDir': path.join(__dirname, "./.data/cart"),
   'hashSecret': "ThisIsMyHashSecret"
 };
 
@@ -24,6 +25,7 @@ environment.production = {
   'envName': "production",
   'dataDir': path.join(__dirname, "./.data"),
   'menuDir': path.join(__dirname, "./.menu"),
+  'cartDir': path.join(__dirname, "./.cart"),
   'hashSecret': "ThisIsMyProductionHashSecret"
 };
 

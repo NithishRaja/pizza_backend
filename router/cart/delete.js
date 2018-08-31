@@ -7,6 +7,7 @@
 const util = require("util");
 const debug = util.debuglog("menu");
 const _data = require("./../../lib/data");
+const _cart = require("./../../lib/cart");
 
 // Delete function
 const remove = function(data, callback){
@@ -20,7 +21,7 @@ const remove = function(data, callback){
         // Checking if token expired and if token belongs to user
         if(tokenData.email===email&&tokenData.timeOfExpiry>Date.now()){
           // Deleting file
-          _data.delete(email, "cart", function(err){
+          _cart.delete(email, function(err){
             if(!err){
               callback(200);
             }else{
