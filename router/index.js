@@ -10,6 +10,7 @@ const users = require("./users");
 const tokens = require("./tokens");
 const menu = require("./menu");
 const cart = require("./cart");
+const order = require("./order");
 
 // Container object
 const router = {
@@ -18,6 +19,7 @@ const router = {
   'tokens': tokens,
   'menu': menu,
   'cart': cart,
+  'order': order,
   'notFound': notFound
 };
 

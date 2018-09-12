@@ -16,7 +16,9 @@ environment.development = {
   'dataDir': path.join(__dirname, "./.data"),
   'menuDir': path.join(__dirname, "./.menu"),
   'cartDir': path.join(__dirname, "./.data/cart"),
-  'hashSecret': "ThisIsMyHashSecret"
+  'hashSecret': "ThisIsMyHashSecret",
+  'stripeUrl': "https://api.stripe.com/v1/charges",
+  'stripeAPIKey': "sk_test_FdicNw5uJJG1t5sRMPZcYje4"
 };
 
 // Initializing production environment
@@ -26,7 +28,9 @@ environment.production = {
   'dataDir': path.join(__dirname, "./.data"),
   'menuDir': path.join(__dirname, "./.menu"),
   'cartDir': path.join(__dirname, "./.cart"),
-  'hashSecret': "ThisIsMyProductionHashSecret"
+  'hashSecret': "ThisIsMyProductionHashSecret",
+  'stripeUrl': "api.stripe.com/v1/charges",
+  'stripeAPIKey': ""
 };
 
 // Deciding which environment to export
