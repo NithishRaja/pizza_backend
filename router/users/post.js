@@ -15,7 +15,6 @@ const post = function(data, callback){
   const email = typeof(data.payload.email)=="string"&&data.payload.email.trim().length>0?data.payload.email.trim():false;
   const address = typeof(data.payload.address)=="string"&&data.payload.address.trim().length>0?data.payload.address.trim():false;
   const password = typeof(data.payload.password)=="string"&&data.payload.password.trim().length>0?data.payload.password.trim():false;
-  console.log(JSON.stringify(data.payload));
   // Checking payload content
   if(name&&email&&address&&password){
     // Checking if user exists

@@ -23,7 +23,6 @@ const get = function(data, callback){
           // Getting cart details
           _cart.read(email, function(err, cartData){
             if(!err){
-              console.log(cartData);
               // Checking if cart is empty
               if(cartData){
                 callback(200, cartData);
