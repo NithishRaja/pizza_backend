@@ -7,6 +7,8 @@
 const https = require("https");
 const url = require("url");
 const util = require("util");
+const querystring = require("querystring");
+const StringDecoder = require("string_decoder").StringDecoder;
 const debug = util.debuglog("order");
 const config = require("./../../../config");
 const sendMail = require("./sendMail");
@@ -15,16 +17,37 @@ const sendMail = require("./sendMail");
 const stripeRequest = function(email, amount, currency, source, callback){
   // Parsing url
   const parsedUrl = url.parse(config.stripeUrl);
+  // Preparing query
+  const query={
+    'amount':amount,
+    'currency':currency,
+    'source':source
+  };
+  const queryString = querystring.stringify(query);
   // Setting request details
   const requestDetails = {
     'protocol': parsedUrl.protocol,
     'method': 'POST',
     'hostname': parsedUrl.hostname,
-    'path': parsedUrl.path,
+    'path': parsedUrl.path+"?"+queryString,
     'timeout': 5*1000
   };
   // Initializing request
   const req = https.request(requestDetails, function(res){
+    let decoder = new StringDecoder("utf-8");
+    let buffer="";
+    // Listening to data
+    res.on("data", function(data){
+      buffer+=decoder.write(data);
+    });
+    // Logging data onto console
+    res.on("end", function(){
+      buffer+=decoder.end();
+      console.log("Response payload from stripe: ",buffer);
+    });
+    // Logging response code to console
+    console.log("Response status code from stripe: ",res.statusCode);
+    // Checking status code and responding accordingly
     if(res.statusCode==200){
       callback(res.statusCode, {"Message": "Payment successful"});
       sendMail(email, amount, currency);
@@ -34,10 +57,8 @@ const stripeRequest = function(email, amount, currency, source, callback){
     }
   });
   // Setting headers
-  req.setHeader("Content-Type", "application/x-www-form-urlencoded");
+  // req.setHeader("Content-Type", "application/x-www-form-urlencoded");
   req.setHeader("Authorization", "Bearer "+config.stripeAPIKey);
-  // Preparing payload
-  const payloadString="amount="+amount+"&&currency="+currency+"&&source="+source;
   // Listening to error
   req.on("error", function(err){
     debug("Error while sending request to stripe", err);
@@ -48,11 +69,8 @@ const stripeRequest = function(email, amount, currency, source, callback){
     debug("Request to stripe timedout", err);
     callback(500, {"Error": "Transaction request timed out"});
   });
-  // Settind payload
-  req.write(payloadString, function(){
-    // Sending request
-    req.end();
-  });
+  // Sending request
+  req.end();
 };
 
 // Exporting function

@@ -62,11 +62,8 @@ const sendMail = function(email, amount, currency){
   req.on("timeout", function(err){
     debug("Request to mailgun timedout", err);
   });
-  // Settind payload
-  req.write(payloadString, function(){
-    // Sending request
-    req.end();
-  });
+  // Sending request
+  req.end();
 };
 
 // Exporting function
