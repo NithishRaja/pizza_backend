@@ -9,9 +9,10 @@ const url = require("url");
 const util = require("util");
 const debug = util.debuglog("order");
 const config = require("./../../../config");
+const sendMail = require("./sendMail");
 
 // Function to send request to stripe API to create a charge
-const stripeRequest = function(amount, currency, source, callback){
+const stripeRequest = function(email, amount, currency, source, callback){
   // Parsing url
   const parsedUrl = url.parse(config.stripeUrl);
   // Setting request details
@@ -26,6 +27,7 @@ const stripeRequest = function(amount, currency, source, callback){
   const req = https.request(requestDetails, function(res){
     if(res.statusCode==200){
       callback(res.statusCode, {"Message": "Payment successful"});
+      sendMail(email, amount, currency);
       // TODO: Empty cart
     }else if(res.statusCode>=400){
       callback(res.statusCode, {"Message": "Payment failed"});

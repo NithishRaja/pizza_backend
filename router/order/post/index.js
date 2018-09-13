@@ -22,8 +22,10 @@ const post = function(data, callback){
     // Getting token data and checking if token has expired
     _data.read(tokenId, "tokens", function(err, tokenData){
       if(!err&&tokenData&&tokenData.timeOfExpiry>Date.now()){
+        // Getting user email
+        const email = tokenData.email;
         // Sending request to stripe
-        stripeRequest(amount, currency, source, callback);
+        stripeRequest(email, amount, currency, source, callback);
       }else{
         callback(403, {"Error": "Token has expired or token does not exist"});
       }

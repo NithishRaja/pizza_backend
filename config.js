@@ -18,7 +18,9 @@ environment.development = {
   'cartDir': path.join(__dirname, "./.data/cart"),
   'hashSecret': "ThisIsMyHashSecret",
   'stripeUrl': "https://api.stripe.com/v1/charges",
-  'stripeAPIKey': "sk_test_FdicNw5uJJG1t5sRMPZcYje4"
+  'stripeAPIKey': "sk_test_FdicNw5uJJG1t5sRMPZcYje4",
+  'mailgunUrl': "https://api:ebf50873675cebf204979c29f63730c2-7bbbcb78-88cde6e2@api.mailgun.net/v3/sandbox03683a43ac9d46abb8795bb8f72b6def.mailgun.org/messages",
+  'mailgunEmail': "mailgun@sandbox03683a43ac9d46abb8795bb8f72b6def.mailgun.org"
 };
 
 // Initializing production environment
@@ -30,7 +32,9 @@ environment.production = {
   'cartDir': path.join(__dirname, "./.cart"),
   'hashSecret': "ThisIsMyProductionHashSecret",
   'stripeUrl': "api.stripe.com/v1/charges",
-  'stripeAPIKey': ""
+  'stripeAPIKey': "",
+  'mailgunUrl': "",
+  'mailgunEmail': ""
 };
 
 // Deciding which environment to export
