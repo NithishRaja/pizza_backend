@@ -12,6 +12,7 @@ const StringDecoder = require("string_decoder").StringDecoder;
 const querystring = require("querystring");
 const config = require("./../../../config");
 const _cart = require("./../../../lib/cart");
+const archiveCart = require("./archiveCart");
 
 // Send mail function
 const sendMail = function(email, amount, currency){
@@ -64,12 +65,8 @@ const sendMail = function(email, amount, currency){
     });
     // Logging response code to console
     console.log("Response status code from mailgun: ",res.statusCode);
-    // Emptying cart
-    _cart.delete(email, function(err){
-      if(err){
-        debug("Error while deleting cart", err);
-      }
-    });
+    // Calling function to archive cart
+    archiveCart(email);
   });
   const payloadString = "from="+config.mailgunEmail;
   // Listening to error
