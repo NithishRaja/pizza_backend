@@ -3,3 +3,6 @@
 
 # ignore .menu directory
 .menu
+
+# ignore file with API keys
+API.js

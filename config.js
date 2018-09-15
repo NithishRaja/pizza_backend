@@ -5,6 +5,7 @@
 
 // Dependencies
 const path = require("path");
+const API = require("./API.js");
 
 // Creating environment container
 let environment = {};
@@ -17,10 +18,10 @@ environment.development = {
   'menuDir': path.join(__dirname, "./.menu"),
   'cartDir': path.join(__dirname, "./.data/cart"),
   'hashSecret': "ThisIsMyHashSecret",
-  'stripeUrl': "https://api.stripe.com/v1/charges",
-  'stripeAPIKey': "sk_test_FdicNw5uJJG1t5sRMPZcYje4",
-  'mailgunUrl': "https://api:ebf50873675cebf204979c29f63730c2-7bbbcb78-88cde6e2@api.mailgun.net/v3/sandbox03683a43ac9d46abb8795bb8f72b6def.mailgun.org/messages",
-  'mailgunEmail': "mailgun@sandbox03683a43ac9d46abb8795bb8f72b6def.mailgun.org"
+  'stripeUrl': API.stripeUrl,
+  'stripeAPIKey': API.stripeAPIKey,
+  'mailgunUrl': API.mailgunUrl,
+  'mailgunEmail': API.mailgunEmail
 };
 
 // Initializing production environment
@@ -31,10 +32,10 @@ environment.production = {
   'menuDir': path.join(__dirname, "./.menu"),
   'cartDir': path.join(__dirname, "./.cart"),
   'hashSecret': "ThisIsMyProductionHashSecret",
-  'stripeUrl': "api.stripe.com/v1/charges",
-  'stripeAPIKey': "",
-  'mailgunUrl': "",
-  'mailgunEmail': ""
+  'stripeUrl': API.stripeUrl,
+  'stripeAPIKey': API.stripeAPIKey,
+  'mailgunUrl': API.mailgunUrl,
+  'mailgunEmail': API.mailgunEmail
 };
 
 // Deciding which environment to export
