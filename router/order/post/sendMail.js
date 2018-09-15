@@ -23,8 +23,8 @@ const sendMail = function(email, amount, currency){
   _cart.read(email, function(err, cartArray){
     if(!err&&cartArray&&cartArray.length>0){
       // Looping through cart items
-      cartArray.forEach(function(cartItem){
-        table+="<tr><td>"+(i+1)+"</td><td>"+cartItem.item+"</td><td>"+cartItem.noOfItem+"</td></tr>";
+      cartArray.forEach(function(cartItem, index){
+        table+="<tr><td>"+(index+1)+"</td><td>"+cartItem.item+"</td><td>"+cartItem.noOfItem+"</td></tr>";
       });
       table+="</table>";
     }else{
