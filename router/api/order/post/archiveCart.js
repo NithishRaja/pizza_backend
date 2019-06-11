@@ -6,8 +6,8 @@
 // Dependencies
 const zlib = require("zlib");
 const fs = require("fs");
-const _cart = require("./../../../lib/cart");
-const config = require("./../../../config");
+const _cart = require("./../../../../lib/cart");
+const config = require("./../../../../config");
 
 // Function to compress and asve cart details
 const archive = function(email){

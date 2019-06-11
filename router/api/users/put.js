@@ -6,8 +6,8 @@
 // Dependencies
 const util = require("util");
 const debug = util.debuglog("users");
-const _data = require("./../../lib/data");
-const _helpers = require("./../../lib/helpers");
+const _data = require("./../../../lib/data");
+const _helpers = require("./../../../lib/helpers");
 
 // put function
 const put = function(data, callback){

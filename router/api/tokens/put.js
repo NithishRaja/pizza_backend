@@ -6,7 +6,7 @@
 // Dependencies
 const util = require("util");
 const debug = util.debuglog("tokens");
-const _data = require("./../../lib/data");
+const _data = require("./../../../lib/data");
 
 // put function
 const put = function(data, callback){

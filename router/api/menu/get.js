@@ -6,8 +6,8 @@
 // Dependencies
 const util = require("util");
 const debug = util.debuglog("menu");
-const _menu = require("./../../lib/menu");
-const _data = require("./../../lib/data");
+const _menu = require("./../../../lib/menu");
+const _data = require("./../../../lib/data");
 
 // Get method
 const get = function(data, callback){

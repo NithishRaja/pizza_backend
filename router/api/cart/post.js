@@ -6,9 +6,9 @@
 // Dependencies
 const util = require("util");
 const debug  = util.debuglog("menu");
-const _data  = require("./../../lib/data");
-const _menu = require("./../../lib/menu");
-const _cart = require("./../../lib/cart");
+const _data  = require("./../../../lib/data");
+const _menu = require("./../../../lib/menu");
+const _cart = require("./../../../lib/cart");
 
 // Post function
 const post = function(data, callback){

@@ -6,20 +6,20 @@
 // Dependencies
 const ping = require("./ping");
 const notFound = require("./notFound");
-const users = require("./users");
-const tokens = require("./tokens");
-const menu = require("./menu");
-const cart = require("./cart");
-const order = require("./order");
+const users = require("./api/users");
+const tokens = require("./api/tokens");
+const menu = require("./api/menu");
+const cart = require("./api/cart");
+const order = require("./api/order");
 
 // Container object
 const router = {
   'ping': ping,
-  'users': users,
-  'tokens': tokens,
-  'menu': menu,
-  'cart': cart,
-  'order': order,
+  'api/users': users,
+  'api/tokens': tokens,
+  'api/menu': menu,
+  'api/cart': cart,
+  'api/order': order,
   'notFound': notFound
 };
 

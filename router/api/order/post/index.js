@@ -6,7 +6,7 @@
 // Dependencies
 const util = require("util");
 const debug = util.debuglog("order");
-const _data = require("./../../../lib/data");
+const _data = require("./../../../../lib/data");
 const stripeRequest = require("./stripeRequest");
 
 // Post function

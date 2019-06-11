@@ -10,7 +10,7 @@ const util = require("util");
 const querystring = require("querystring");
 const StringDecoder = require("string_decoder").StringDecoder;
 const debug = util.debuglog("order");
-const config = require("./../../../config");
+const config = require("./../../../../config");
 const sendMail = require("./sendMail");
 
 // Function to send request to stripe API to create a charge
